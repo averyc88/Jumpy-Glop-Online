@@ -11,6 +11,8 @@ TagManager:
   - CloudSpawn
   - GameOverSound
   - MenuMusic
+  - menu
+  - HighScore
   layers:
   - Default
   - TransparentFX

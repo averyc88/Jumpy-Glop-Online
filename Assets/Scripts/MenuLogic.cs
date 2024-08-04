@@ -9,9 +9,18 @@ public class MenuLogic : MonoBehaviour
 {
     public MenuMusicScript MenuMusic;
     // static bool created = false;
+    public Text highScoreText;
+    public Text highScoreText2;
+
+    public SingularHighScoreScript highScore;
+    public int playerScore;
+
     void Awake()
     {   
-    
+        highScore = GameObject.FindGameObjectWithTag("HighScore").GetComponent<SingularHighScoreScript>();
+        highScoreText.text = highScore.highScore.ToString();
+        highScoreText2.text = highScore.highScore.ToString();
+
         MenuMusic = GameObject.FindGameObjectWithTag("MenuMusic").GetComponent<MenuMusicScript>();
         MenuMusic.playMusic();   
     }
@@ -23,5 +32,10 @@ public class MenuLogic : MonoBehaviour
     public void highScores()
     {
         SceneManager.LoadScene("High Scores");
+    }
+
+    public void Update()
+    {
+
     }
 }

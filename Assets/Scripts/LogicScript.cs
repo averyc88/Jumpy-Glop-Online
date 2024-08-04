@@ -14,6 +14,8 @@ public class LogicScript : MonoBehaviour
     public AudioSource GameOverSound;
     public MenuMusicScript MenuMusic;
 
+    public SingularHighScoreScript highScore;
+
     public Dictionary<string, Tuple<string, int>> highScores = new Dictionary<string, Tuple<string, int>>();
 
     void Start()
@@ -24,6 +26,7 @@ public class LogicScript : MonoBehaviour
         spawn = GameObject.FindGameObjectWithTag("PipeSpawn").GetComponent<PipeSpawnScript>();
         GameOverSound = GameObject.FindGameObjectWithTag("GameOverSound").GetComponent<AudioSource>();
         MenuMusic = GameObject.FindGameObjectWithTag("MenuMusic").GetComponent<MenuMusicScript>();
+        highScore = GameObject.FindGameObjectWithTag("HighScore").GetComponent<SingularHighScoreScript>();
 
         MenuMusic.stopMusic();
         Song = GetComponent<AudioSource>();
@@ -39,6 +42,8 @@ public class LogicScript : MonoBehaviour
     public int playerScore;
     public string curPlayer;
     public Text scoreText;
+    public Text scoreText2;
+
     public GameObject gameOverScreen;
     public bool gameEnded = false;
     public bool nameEntered = false;
@@ -49,6 +54,7 @@ public class LogicScript : MonoBehaviour
     {
         playerScore += scoreToAdd;
         scoreText.text = playerScore.ToString();
+        scoreText2.text = playerScore.ToString();
     }
     public void restartGame()
     {
@@ -68,6 +74,11 @@ public class LogicScript : MonoBehaviour
         gameEnded = true;
         Song.Stop();
         GameOverSound.Play();
+
+        if (playerScore > highScore.highScore) 
+        {
+            highScore.highScore = playerScore;
+        }
 
         // handle game over coroutine
         StartCoroutine(HandleGameOver());
