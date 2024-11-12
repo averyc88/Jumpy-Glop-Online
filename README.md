@@ -1,7 +1,5 @@
 # Jumpy-Glop-Online
 
-
-
 Simple game for development practice.
 
 Current Features: 
